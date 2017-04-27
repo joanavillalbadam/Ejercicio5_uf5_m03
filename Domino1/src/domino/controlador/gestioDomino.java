@@ -9,8 +9,10 @@ import domino.model.Fitxa;
 import domino.model.Joc;
 import domino.model.Jugador;
 import domino.model.Torn;
+import domino.vista.FinestraJoc;
 import domino.vista.InterficieDomino;
 import java.lang.reflect.Array;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -19,7 +21,7 @@ import java.lang.reflect.Array;
 public class gestioDomino {
     private Joc joc;
     private Torn torn;
-    private InterficieDomino vista;
+    private FinestraJoc vista;
     private Jugador jugador;
     private Fitxa fitxa;
     private String nombre[] = new String[4];
@@ -28,7 +30,7 @@ public class gestioDomino {
     public gestioDomino() {
         this.joc = new Joc(4,28,7);
         this.torn = new Torn(joc);
-        this.vista = new InterficieDomino();
+        //this.vista = new InterficieDomino();
         
     }
       public void introducirNombres() {
@@ -36,7 +38,7 @@ public class gestioDomino {
       //  System.out.println("llega a entrar en introducir nombres!!");
       //  throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
    for (int m = 0; m < 4; m++){
-   nombre[m] = vista.DarNombres(m);
+   nombre[m] = JOptionPane.showInputDialog("Introduce el nombre del jugador" + m);
     System.out.println(m);
    }
     
@@ -49,15 +51,24 @@ public class gestioDomino {
         joc.iniciar(nombre);
         torn.inicial();
        
-       
-        while(!joc.isFinalitzat()){
-        joc.torn = joc.getTorn();
-        vista.MostrarNombreJugador(joc.getJugadors()[joc.getTorn()]);
-        vista.MostrarTurnoJugador(joc.getTorn());
+        vista = new FinestraJoc();
+        
+        vista.MostrarNombreJugador(nombre[0], nombre[1], nombre[2], nombre[3]);
+        vista.MostrarFitxasJugador(joc.jugadors[0].getFitxes(), joc.jugadors[1].getFitxes(), joc.jugadors[2].getFitxes(), joc.jugadors[3].getFitxes());
         vista.MostrarFitxasMesa(joc.getFitxesJugades());
-        vista.MostrarFitxasJugador(joc.jugadors[joc.getTorn()].getFitxes());
+        vista.MostrarTurnoJugador(joc.getJugadors()[joc.getTorn()]);
+        /*
+       */
+        
+       
+       /* while(!joc.isFinalitzat()){
+        joc.torn = joc.getTorn();
+       // vista.MostrarNombreJugador(joc.getJugadors()[joc.getTorn()]);
+        vista.MostrarFitxasJugador(joc.jugadors[0].getFitxes(), joc.jugadors[1].getFitxes(), joc.jugadors[2].getFitxes(), joc.jugadors[3].getFitxes());
+        vista.MostrarFitxasMesa(joc.getFitxesJugades());
+        vista.MostrarTurnoJugador(joc.getJugadors()[joc.getTorn()]);
           
-        respostaOpcioMenu();
+        //respostaOpcioMenu();
         
         joc.actualitzarEstat();
         
@@ -80,7 +91,7 @@ public class gestioDomino {
             Passar();
             break;
         default:
-            vista.missatgeError();
+            //vista.missatgeError();
             break;
     
 }
@@ -127,7 +138,7 @@ public class gestioDomino {
     System.out.println("Has passat!");
         torn.passar();
     
-    }
+  */  }
 
   
 }

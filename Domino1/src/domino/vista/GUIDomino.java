@@ -5,6 +5,7 @@
  */
 package domino.vista;
 
+import domino.controlador.gestioDomino;
 import java.awt.BorderLayout;
 import java.awt.CardLayout;
 import java.awt.Color;
@@ -40,10 +41,10 @@ public class GUIDomino extends JFrame implements ActionListener {
         setJMenuBar(mb);
         menu1 = new JMenu("Opciones");
         mb.add(menu1);
-        mi1 = new JMenuItem("Configuracion del Juego");
+        mi1 = new JMenuItem("Jugar!");
         mi1.addActionListener(this);
         menu1.add(mi1);
-        mi2 = new JMenuItem("Jugar amb la config per defecte");
+        mi2 = new JMenuItem("Instrucciones modo de juego");
         mi2.addActionListener(this);
         menu1.add(mi2);
 //        mi3=new JMenuItem("Azul");
@@ -58,54 +59,24 @@ public class GUIDomino extends JFrame implements ActionListener {
             
             f.setBackground(new Color(204, 255, 153));
             
-            label1 = new JLabel("Numero De jugadores:");
-            label1.setBounds(10, 10, 200, 30);
-            add(label1);
+            JButton bot1 = new JButton("Jugar Modo 1");
+            bot1.setBounds(100, 10, 200, 30);
+            add(bot1);
             
-            JTextField nJugadores = new JTextField();
-            nJugadores.setBounds(160, 10, 150, 20);
-            add(nJugadores);
+            JButton bot2 = new JButton("Jugar Modo 2");
+            bot2.setBounds(100, 40, 200, 30);
+            add(bot2);
             
-            label1 = new JLabel("Amb totes les fitxes?");
-            label1.setBounds(10, 40, 200, 30);
-            add(label1);
             
-            JTextField TodasFitxas = new JTextField();
-            TodasFitxas.setBounds(160, 40, 150, 20);
-            add(TodasFitxas);
-            
-            boton1 = new JButton("Aceptar");
-            boton1.setBounds(210, 80, 100, 30);
-            add(boton1);
-            
-           // boton1.addActionListener(this);
-            
-            boton1.addActionListener(new java.awt.event.ActionListener() {
+            bot1.addActionListener(new java.awt.event.ActionListener() {
                 
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                String n = nJugadores.getText();
-                System.out.println(n);
-                if(nJugadores.getText().equals("4")){
-                JButtonObrirFinestraUnJugador(evt);
-                }else{
-                JButtonObrirFinestraDosJugadors(evt);
-                }
-                }
-
-                private void JButtonObrirFinestraUnJugador(ActionEvent evt) {
-                 // throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-                   String num = nJugadores.getText();
-                   String fitx = TodasFitxas.getText();
-                   FinestraJoc fj = new FinestraJoc(num, fitx);
-                }
-
-                private void JButtonObrirFinestraDosJugadors(ActionEvent evt) {
-                   // throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-                   String num = nJugadores.getText();
-                   String fitx = TodasFitxas.getText();
-                   FinestraJoc2J fj = new FinestraJoc2J(num, fitx);
+                
+                gestioDomino gesD = new gestioDomino();
+                gesD.Iniciar();
                 
                 }
+
         });
             }
         if (e.getSource() == mi2) {
@@ -120,9 +91,9 @@ public class GUIDomino extends JFrame implements ActionListener {
              
     }
 
-    public static void main(String[] ar) {
-        GUIDomino formulario1 = new GUIDomino();
-        formulario1.setBounds(10, 20, 500, 500);
-        formulario1.setVisible(true);
-    }
+//    public static void main(String[] ar) {
+//        GUIDomino formulario1 = new GUIDomino();
+//        formulario1.setBounds(10, 20, 500, 500);
+//        formulario1.setVisible(true);
+//    }
 }
